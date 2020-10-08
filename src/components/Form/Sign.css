@@ -1,0 +1,31 @@
+.sign__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #cfcbcb;
+    align-items: center;
+    padding: 1.6rem;
+  }
+  
+  .sign__logo {
+    height: 50px;
+    object-fit: contain;
+  }
+  
+  .sign__title {
+    text-align: center;
+    margin-top: 25px;
+  }
+  
+  .sign__title h1 {
+    font-size: 3em;
+    text-transform: uppercase;
+    font-style: italic;
+    font-family: "Sora", sans-serif;
+    color: rgb(53, 53, 53);
+  }
+  
+  @media (min-width: 500px) {
+    .sign__title h1 {
+      margin-bottom: 3em;
+    }
+  }
