@@ -1,11 +1,17 @@
 import React from "react";
+import "./App.css";
+
 import Home from "./components/Home/Home";
 import SignUp from "./components/SignUp/SignUp";
 import SignIn from "./components/SignIn/SignIn";
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { authentification } from "./firebase/firebase";
 import Cards from "./components/Cards/Cards";
+import Profil from "./components/Profil/Profil";
+import SignOut from "./components/SignOut/SignOut";
+
+
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { authentification } from "./firebase/firebase";
+import NotFound from "./components/NotFound/NotFound";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -33,15 +39,24 @@ export default class App extends React.Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route path="/sign_in">
+            <Route exact path="/sign_in">
               <SignIn />
             </Route>
-            <Route path="/sign_up">
+            <Route exact path="/sign_up">
               <SignUp />
             </Route>
-            <Route path="/">
+            <Route exact path="/sign_out">
+              {this.state.user ? <SignOut /> : <Redirect to="/sign_in"/>}
+            </Route>
+            <Route exact path="/profil">
+              {this.state.user ? <Profil /> : <Redirect to="/sign_in"/>}
+            </Route>
+            <Route exact path="/">
               {this.state.user ? <Cards /> : <Home />}
-              </Route>
+            </Route>
+            <Route path="/">
+              <NotFound />
+            </Route>
           </Switch>
         </Router>
       </div>

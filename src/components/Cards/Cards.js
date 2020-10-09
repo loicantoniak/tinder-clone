@@ -1,14 +1,14 @@
-import React from 'react'
-import Header from '../Header/Header'
-import TinderCards from './TinderCards/TinderCards'
-import SwipeButtons from './SwipeButtons'
+import React from "react";
+import Header from "../Header/Header";
+import TinderCards from "./TinderCards/TinderCards";
+import SwipeButtons from "./SwipeButtons";
 
 export default function Cards() {
-    return (
-        <div>
-            <Header />
-            <TinderCards />
-            <SwipeButtons />
-        </div>
-    )
+  return (
+    <div>
+      <Header />
+      <TinderCards />
+      <SwipeButtons />
+    </div>
+  );
 }

@@ -76,7 +76,7 @@ export default function SignUp() {
         </Link>
 
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? <Redirect to="/"/> : "S'inscire"}
+          {isSubmitting ?  <Redirect to="/"/> : "S'inscire"}
         </button>
         
         {hasError && (
