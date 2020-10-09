@@ -8,8 +8,12 @@ import Cards from "./components/Cards/Cards";
 import Profil from "./components/Profil/Profil";
 import SignOut from "./components/SignOut/SignOut";
 
-
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import { authentification } from "./firebase/firebase";
 import NotFound from "./components/NotFound/NotFound";
 
@@ -46,13 +50,13 @@ export default class App extends React.Component {
               <SignUp />
             </Route>
             <Route exact path="/sign_out">
-              {this.state.user ? <SignOut /> : <Redirect to="/sign_in"/>}
+              {this.state.user ? <SignOut /> : <Redirect to="sign_in" />}
             </Route>
             <Route exact path="/profil">
-              {this.state.user ? <Profil /> : <Redirect to="/sign_in"/>}
+              {this.state.isLoading ? <p>Chargement</p> : this.state.user ? <Profil /> : <Redirect to="sign_in" /> }
             </Route>
             <Route exact path="/">
-              {this.state.user ? <Cards /> : <Home />}
+              {this.state.isLoading ? <p>Chargement</p> : this.state.user ? <Cards /> :  <Home /> }
             </Route>
             <Route path="/">
               <NotFound />
