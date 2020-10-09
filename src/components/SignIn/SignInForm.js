@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "../Form/Form.css";
 import { useFormik } from "formik";
-import {Link} from "react-router-dom"
+import { Link, Redirect } from "react-router-dom";
+import { authentification } from "../../firebase/firebase";
 
 export default function SignUp() {
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasError, setHasError] = useState(false);
+
   function validate(values) {
     const errors = {};
     if (!values.email) {
@@ -27,11 +32,17 @@ export default function SignUp() {
       password: "",
     },
     validate,
-    onSubmit(values) {
-      console.log(values);
+    async onSubmit(values) {
+      const { email, password } = values;
+      try {
+        await authentification.signInWithEmailAndPassword(email, password);
+        setIsSubmitting(true);
+      } catch (error) {
+        setHasError(true);
+        setIsSubmitting(false);
+      }
     },
   });
-
   return (
     <>
       <form className="sign__form" onSubmit={formik.handleSubmit}>
@@ -65,7 +76,15 @@ export default function SignUp() {
         <Link to="reset_password">
           <p>Mot de passe oublié ?</p>
         </Link>
-        <button type="submit">Se connecter</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? <Redirect to="/"/> : "Connexion"}
+        </button>
+        
+        {hasError && (
+          <p>
+            <span className="error">Une erreur est survenue</span>
+          </p>
+        )}
       </form>
     </>
   );
