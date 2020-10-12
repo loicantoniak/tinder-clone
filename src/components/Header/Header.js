@@ -21,7 +21,7 @@ export default function Header(props) {
           <ArrowBackIosIcon className="header__icon" fontSize="large" />
         </IconButton>
       ) : (
-        <Link to="profil">
+        <Link to="/profil">
           <IconButton>
             <PersonIcon className="header__icon" fontSize="large" />
           </IconButton>
@@ -31,7 +31,7 @@ export default function Header(props) {
       <Link to="/">
         <img className="header__logo" src={logo} alt="logo_tinder" />
       </Link>
-      <Link to="/chat">
+      <Link to="/chats">
         <IconButton>
           <ForumIcon className="header__icon" fontSize="large" />
         </IconButton>

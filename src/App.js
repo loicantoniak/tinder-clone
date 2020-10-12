@@ -7,6 +7,10 @@ import SignIn from "./components/SignIn/SignIn";
 import Cards from "./components/Cards/Cards";
 import Profil from "./components/Profil/Profil";
 import SignOut from "./components/SignOut/SignOut";
+import NotFound from "./components/NotFound/NotFound";
+import ChatScreen from "./components/Chat/ChatScreen";
+import Chats from "./components/Chat/Chats";
+import CreateProfil from './components/CreateProfil/CreateProfil'
 
 import {
   BrowserRouter as Router,
@@ -15,7 +19,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import { authentification } from "./firebase/firebase";
-import NotFound from "./components/NotFound/NotFound";
+
 
 export default class App extends React.Component {
   constructor(props) {
@@ -53,10 +57,49 @@ export default class App extends React.Component {
               {this.state.user ? <SignOut /> : <Redirect to="sign_in" />}
             </Route>
             <Route exact path="/profil">
-              {this.state.isLoading ? <p>Chargement</p> : this.state.user ? <Profil /> : <Redirect to="sign_in" /> }
+              {this.state.isLoading ? (
+                <p>Chargement</p>
+              ) : this.state.user ? (
+                <Profil />
+              ) : (
+                <Redirect to="sign_in" />
+              )}
             </Route>
             <Route exact path="/">
-              {this.state.isLoading ? <p>Chargement</p> : this.state.user ? <Cards /> :  <Home /> }
+              {this.state.isLoading ? (
+                <p>Chargement</p>
+              ) : this.state.user ? (
+                <Cards />
+              ) : (
+                <Home />
+              )}
+            </Route>
+            <Route exact path="/createProfil">
+              {this.state.isLoading ? (
+                <p>Chargement</p>
+              ) : this.state.user ? (
+                <CreateProfil />
+              ) : (
+                <Home />
+              )}
+            </Route>
+            <Route path="/chat/:prentender">
+            {this.state.isLoading ? (
+                <p>Chargement</p>
+              ) : this.state.user ? (
+                <ChatScreen />
+              ) : (
+                <Redirect to="sign_in" />
+              )}
+            </Route>
+            <Route path="/chats">
+            {this.state.isLoading ? (
+                <p>Chargement</p>
+              ) : this.state.user ? (
+                <Chats />
+              ) : (
+                <Redirect to="sign_in" />
+              )}
             </Route>
             <Route path="/">
               <NotFound />

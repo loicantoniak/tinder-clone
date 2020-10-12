@@ -12,16 +12,16 @@ export default function SignUp() {
   function validate(values) {
     const errors = {};
     if (!values.email) {
-      errors.email = "Required";
+      errors.email = "Veuillez saisir ce champ (obligatoire)";
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = "Veuillez saisir une adresse mail valide";
     }
     if (!values.password) {
-      errors.password = "Required";
+      errors.password = "Veuillez saisir ce champ (obligatoire)";
     } else if (values.password.length < 8) {
-      errors.password = "Must be 8 characters or more";
+      errors.password = "Le mot de passe doit contenir au minimum 8 caractères.";
     }
     return errors;
   }
