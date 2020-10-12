@@ -11,16 +11,22 @@ export default function SignUp() {
   function validate(values) {
     const errors = {};
     if (!values.email) {
-      errors.email = "Required";
+      errors.email = "Veuillez saisir ce champ (obligatoire)";
     } else if (
       !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
     ) {
-      errors.email = "Invalid email address";
+      errors.email = "Veuillez saisir une adresse mail valide";
     }
     if (!values.password) {
-      errors.password = "Required";
+      errors.password = "Veuillez saisir ce champ (obligatoire)";
     } else if (values.password.length < 8) {
-      errors.password = "Must be 8 characters or more";
+      errors.password =
+        "Le mot de passe doit contenir au minimum 8 caractères.";
+    }
+    if (!values.passwordCopy) {
+      errors.passwordCopy = "Veuillez saisir ce champ (obligatoire)";
+    } else if (!(values.passwordCopy === values.password)) {
+      errors.passwordCopy = "Les mots de passe ne sont pas identiques";
     }
     return errors;
   }
@@ -29,6 +35,7 @@ export default function SignUp() {
     initialValues: {
       email: "",
       password: "",
+      passwordCopy: "",
     },
     validate,
     async onSubmit(values) {
@@ -71,14 +78,27 @@ export default function SignUp() {
           <div className="alert__error">{formik.errors.password}</div>
         ) : null}
 
+        <label htmlFor="password">Confirmation du mot de passe</label>
+        <input
+          type="password"
+          id="passwordCopy"
+          name="passwordCopy"
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          values={formik.values.passwordCopy}
+        />
+        {formik.touched.passwordCopy && formik.errors.passwordCopy ? (
+          <div className="alert__error">{formik.errors.passwordCopy}</div>
+        ) : null}
+
         <Link to="sign_in">
           <p>Déjà inscrit ? Connecte-toi ici</p>
         </Link>
 
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ?  <Redirect to="/"/> : "S'inscire"}
+          {isSubmitting ? <Redirect to="/" /> : "S'inscire"}
         </button>
-        
+
         {hasError && (
           <p>
             <span className="error">Une erreur est survenue</span>
